@@ -1,0 +1,6 @@
+guardrails:
+  policy_version: "1.0"
+  domain_relevance_threshold: 0.80
+  entity_confidence_threshold: 0.75
+  numerical_rounding_tolerance: "0.000001"
+  max_input_characters: 20000

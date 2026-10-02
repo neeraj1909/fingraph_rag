@@ -1,0 +1,8 @@
+retrieval:
+  dense_top_k: 20
+  sparse_top_k: 20
+  rerank_top_k: 8
+  rrf_k: 60
+  max_graph_nodes: 80
+  max_graph_edges: 120
+  max_paths: 20
