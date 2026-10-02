@@ -1,0 +1,10 @@
+app:
+  environment: dev
+  log_level: INFO
+  schema_version: "1.0"
+
+runtime:
+  max_hops: 4
+  max_context_tokens: 12000
+  max_query_seconds: 30
+  cypher_repair_retries: 2

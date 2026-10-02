@@ -1,0 +1,9 @@
+evaluation:
+  seed: 7
+  systems:
+    - naive_hybrid
+    - fingraph_rag
+  datasets:
+    - name: smoke
+      snapshot: local-fixture-v1
+      license_review: pending
