@@ -1,0 +1,15 @@
+SYNTHETIC ACME CORPORATION
+FORM 10-K FIXTURE — NOT A REAL FILING
+
+Item 7. Management's Discussion and Analysis
+
+Revenue increased in the synthetic 2024 fiscal year. The following table is
+intentionally represented with a footnote marker attached to the operating
+margin value.
+
+Consolidated Results
+Fiscal year       2024       2023
+Revenue           1,250      1,100
+Operating margin  18.4%[1]  17.1%
+
+[1] The synthetic operating margin includes a fictional one-time adjustment.

@@ -1,0 +1,111 @@
+{
+  "document_id": "doc_synthetic_acme_2024_10k",
+  "artifact_id": "artifact_65a90e6c9c4f295f89a97569d4d079a5",
+  "document_type": "sec_10k",
+  "issuer_id": "company_synthetic_acme",
+  "accession_number": "SYNTHETIC-2024-10K",
+  "filing_date": "2025-02-28",
+  "title": "Synthetic Acme Corporation Form 10-K Fixture",
+  "parser_version": "fixture-parser-1",
+  "source_content_sha256": "4058bce41f33e93f9dbcd13a57cf55a506666fc3cd71557c2e979d8dd7750111",
+  "sections": [
+    {
+      "section_id": "section_item_7",
+      "heading": "Item 7. Management's Discussion and Analysis",
+      "ordinal": 0,
+      "level": 1,
+      "text": "Revenue increased in the synthetic 2024 fiscal year.",
+      "locator": {"kind": "section", "page": 1}
+    }
+  ],
+  "tables": [
+    {
+      "table_id": "table_consolidated_results",
+      "title": "Consolidated Results",
+      "locator": {"kind": "table", "page": 1, "table_id": "table_consolidated_results"},
+      "footnote_ids": ["footnote_margin_adjustment"],
+      "cells": [
+        {
+          "cell_id": "cell_header_metric",
+          "table_id": "table_consolidated_results",
+          "row_index": 0,
+          "column_index": 0,
+          "raw_value": "Metric",
+          "cell_type": "header",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_consolidated_results", "cell_id": "cell_header_metric"}
+        },
+        {
+          "cell_id": "cell_header_2024",
+          "table_id": "table_consolidated_results",
+          "row_index": 0,
+          "column_index": 1,
+          "raw_value": "2024",
+          "period_label": "FY2024",
+          "cell_type": "header",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_consolidated_results", "cell_id": "cell_header_2024"}
+        },
+        {
+          "cell_id": "cell_revenue_2024",
+          "table_id": "table_consolidated_results",
+          "row_index": 1,
+          "column_index": 1,
+          "raw_value": "1,250",
+          "normalized_value": "1250",
+          "cell_type": "value",
+          "period_label": "FY2024",
+          "unit": "USD millions",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_consolidated_results", "cell_id": "cell_revenue_2024"}
+        },
+        {
+          "cell_id": "cell_margin_2024",
+          "table_id": "table_consolidated_results",
+          "row_index": 2,
+          "column_index": 1,
+          "raw_value": "18.4%[1]",
+          "normalized_value": "18.4%",
+          "cell_type": "footnote_marker",
+          "period_label": "FY2024",
+          "unit": "%",
+          "footnote_ids": ["footnote_margin_adjustment"],
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_consolidated_results", "cell_id": "cell_margin_2024"}
+        }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "footnote_id": "footnote_margin_adjustment",
+      "marker": "[1]",
+      "text": "The synthetic operating margin includes a fictional one-time adjustment.",
+      "linked_cell_ids": ["cell_margin_2024"],
+      "locator": {"kind": "footnote", "page": 1, "footnote_id": "footnote_margin_adjustment"}
+    }
+  ],
+  "chunks": [
+    {
+      "chunk_id": "chunk_synthetic_acme_item_7",
+      "document_id": "doc_synthetic_acme_2024_10k",
+      "ordinal": 0,
+      "family": "narrative",
+      "text": "Revenue increased in the synthetic 2024 fiscal year.",
+      "chunking_policy": "section-v1",
+      "source_references": [{"kind": "section", "source_id": "section_item_7"}],
+      "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "chunk_id": "chunk_synthetic_acme_table_results",
+      "document_id": "doc_synthetic_acme_2024_10k",
+      "ordinal": 1,
+      "family": "table_summary",
+      "text": "Consolidated Results; FY2024 Revenue: 1,250 USD millions; FY2024 Operating margin: 18.4%; footnote [1].",
+      "chunking_policy": "table-summary-v1",
+      "source_references": [
+        {"kind": "table", "source_id": "table_consolidated_results"},
+        {"kind": "table_cell", "source_id": "cell_revenue_2024"},
+        {"kind": "table_cell", "source_id": "cell_margin_2024"},
+        {"kind": "footnote", "source_id": "footnote_margin_adjustment"}
+      ],
+      "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ]
+}
