@@ -1,0 +1,19 @@
+SYNTHETIC ACME CORPORATION
+FORM 10-Q FIXTURE — NOT A REAL FILING
+
+Item 2. Management's Discussion and Analysis
+
+[Page 1]
+The quarterly table below continues on page 2; the repeated header is
+intentionally omitted to model a broken PDF table extraction.
+
+Quarterly Operations
+Metric            Q3 2024    Q2 2024
+Revenue           340        325
+Operating margin  19.2%[2]   18.7%
+
+[Page 2]
+Quarterly Operations (continued)
+Supplier concentration 42%   40%
+
+[2] Margin includes a fictional one-time adjustment.
