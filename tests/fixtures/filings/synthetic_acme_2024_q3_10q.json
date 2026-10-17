@@ -1,0 +1,170 @@
+{
+  "document_id": "doc_synthetic_acme_2024_q3_10q",
+  "artifact_id": "artifact_9a3be594cb750099e7166eb13b548fe0",
+  "document_type": "sec_10q",
+  "issuer_id": "company_synthetic_acme",
+  "accession_number": "SYNTHETIC-2024-Q3-10Q",
+  "filing_date": "2024-11-01",
+  "title": "Synthetic Acme Corporation Form 10-Q Fixture",
+  "parser_version": "fixture-parser-1",
+  "source_content_sha256": "abc7ac55bba5ead60eb8ae81ab85f23461487934e97498d52c242ba4ca0fe4e4",
+  "sections": [
+    {
+      "section_id": "section_item_2_q3",
+      "heading": "Item 2. Management's Discussion and Analysis",
+      "ordinal": 0,
+      "level": 1,
+      "text": "The quarterly table continues on page 2.",
+      "locator": {"kind": "section", "page": 1}
+    }
+  ],
+  "tables": [
+    {
+      "table_id": "table_quarterly_operations",
+      "title": "Quarterly Operations",
+      "locator": {"kind": "table", "page": 1, "table_id": "table_quarterly_operations"},
+      "footnote_ids": ["footnote_quarterly_margin"],
+      "cells": [
+        {
+          "cell_id": "cell_q3_header_metric",
+          "table_id": "table_quarterly_operations",
+          "row_index": 0,
+          "column_index": 0,
+          "raw_value": "Metric",
+          "cell_type": "header",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q3_header_metric"}
+        },
+        {
+          "cell_id": "cell_q3_header_q3",
+          "table_id": "table_quarterly_operations",
+          "row_index": 0,
+          "column_index": 1,
+          "raw_value": "Q3 2024",
+          "period_label": "Q3 2024",
+          "cell_type": "header",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q3_header_q3"}
+        },
+        {
+          "cell_id": "cell_q3_header_q2",
+          "table_id": "table_quarterly_operations",
+          "row_index": 0,
+          "column_index": 2,
+          "raw_value": "Q2 2024",
+          "period_label": "Q2 2024",
+          "cell_type": "header",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q3_header_q2"}
+        },
+        {
+          "cell_id": "cell_q3_revenue",
+          "table_id": "table_quarterly_operations",
+          "row_index": 1,
+          "column_index": 1,
+          "raw_value": "340",
+          "normalized_value": "340",
+          "period_label": "Q3 2024",
+          "unit": "USD millions",
+          "cell_type": "value",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q3_revenue"}
+        },
+        {
+          "cell_id": "cell_q2_revenue",
+          "table_id": "table_quarterly_operations",
+          "row_index": 1,
+          "column_index": 2,
+          "raw_value": "325",
+          "normalized_value": "325",
+          "period_label": "Q2 2024",
+          "unit": "USD millions",
+          "cell_type": "value",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q2_revenue"}
+        },
+        {
+          "cell_id": "cell_q3_margin",
+          "table_id": "table_quarterly_operations",
+          "row_index": 2,
+          "column_index": 1,
+          "raw_value": "19.2%[2]",
+          "normalized_value": "19.2%",
+          "period_label": "Q3 2024",
+          "unit": "%",
+          "cell_type": "footnote_marker",
+          "footnote_ids": ["footnote_quarterly_margin"],
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q3_margin"}
+        },
+        {
+          "cell_id": "cell_q2_margin",
+          "table_id": "table_quarterly_operations",
+          "row_index": 2,
+          "column_index": 2,
+          "raw_value": "18.7%",
+          "normalized_value": "18.7%",
+          "period_label": "Q2 2024",
+          "unit": "%",
+          "cell_type": "value",
+          "locator": {"kind": "table_cell", "page": 1, "table_id": "table_quarterly_operations", "cell_id": "cell_q2_margin"}
+        },
+        {
+          "cell_id": "cell_q3_supplier_concentration",
+          "table_id": "table_quarterly_operations",
+          "row_index": 3,
+          "column_index": 1,
+          "raw_value": "42%",
+          "normalized_value": "42%",
+          "period_label": "Q3 2024",
+          "unit": "%",
+          "cell_type": "value",
+          "locator": {"kind": "table_cell", "page": 2, "table_id": "table_quarterly_operations", "cell_id": "cell_q3_supplier_concentration"}
+        },
+        {
+          "cell_id": "cell_q2_supplier_concentration",
+          "table_id": "table_quarterly_operations",
+          "row_index": 3,
+          "column_index": 2,
+          "raw_value": "40%",
+          "normalized_value": "40%",
+          "period_label": "Q2 2024",
+          "unit": "%",
+          "cell_type": "value",
+          "locator": {"kind": "table_cell", "page": 2, "table_id": "table_quarterly_operations", "cell_id": "cell_q2_supplier_concentration"}
+        }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "footnote_id": "footnote_quarterly_margin",
+      "marker": "[2]",
+      "text": "Margin includes a fictional one-time adjustment.",
+      "linked_cell_ids": ["cell_q3_margin"],
+      "locator": {"kind": "footnote", "page": 2, "footnote_id": "footnote_quarterly_margin"}
+    }
+  ],
+  "chunks": [
+    {
+      "chunk_id": "chunk_synthetic_acme_q3_item_2",
+      "document_id": "doc_synthetic_acme_2024_q3_10q",
+      "ordinal": 0,
+      "family": "narrative",
+      "text": "The quarterly table continues on page 2.",
+      "chunking_policy": "section-v1",
+      "source_references": [{"kind": "section", "source_id": "section_item_2_q3"}],
+      "content_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "chunk_id": "chunk_synthetic_acme_q3_table",
+      "document_id": "doc_synthetic_acme_2024_q3_10q",
+      "ordinal": 1,
+      "family": "table_summary",
+      "text": "Quarterly Operations; Q3 2024 Revenue: 340 USD millions; Q3 2024 Operating margin: 19.2%; continued on page 2; footnote [2].",
+      "chunking_policy": "table-summary-v1",
+      "source_references": [
+        {"kind": "table", "source_id": "table_quarterly_operations"},
+        {"kind": "table_cell", "source_id": "cell_q3_revenue"},
+        {"kind": "table_cell", "source_id": "cell_q3_margin"},
+        {"kind": "table_cell", "source_id": "cell_q3_supplier_concentration"},
+        {"kind": "footnote", "source_id": "footnote_quarterly_margin"}
+      ],
+      "content_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    }
+  ]
+}
