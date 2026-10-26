@@ -29,3 +29,14 @@ canonical JSON sidecar remains an explicit compatibility path for the fixture
 parser. Public
 benchmark or SEC data must be added later with a dataset manifest, license/terms
 record, source hash, and replay policy.
+
+`DoclingLayoutParser` is an optional adapter at the same boundary. It lazy-loads
+the SDK only for a real composition root, while tests inject a converter-shaped
+fake and still exercise canonical page, table-cell, and footnote provenance.
+
+The production adapter is activated with the optional pinned dependency
+`docling==2.129.0`. The integration smoke test generates a repository-owned
+synthetic PDF, fetches it through `FixtureSourceFetcher`, converts it with the
+real Docling converter, maps its ruled table and footnote marker into canonical
+contracts, and verifies idempotent replay. This validates the provider boundary;
+it does not authorize or imply a public financial corpus.
