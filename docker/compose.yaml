@@ -1,72 +1,254 @@
 name: fingraph-rag
-
 services:
   postgres:
-    image: postgres:16.4-alpine
+    image: postgres:16.4-alpine@sha256:5660c2cbfea50c7a9127d17dc4e48543eedd3d7a41a595a2dfa572471e37e64c
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-fingraph}
       POSTGRES_USER: ${POSTGRES_USER:-fingraph}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fingraph_dev}
     ports:
-      - "5432:5432"
+    - 127.0.0.1:5432:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+    - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
       interval: 5s
       timeout: 5s
       retries: 10
-
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1
+    security_opt:
+    - no-new-privileges:true
   redis:
-    image: redis:7.4.1-alpine
+    image: redis:7.4.1-alpine@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275
     ports:
-      - "6379:6379"
+    - 127.0.0.1:6379:6379
     volumes:
-      - redis_data:/data
+    - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test:
+      - CMD
+      - redis-cli
+      - ping
       interval: 5s
       timeout: 3s
       retries: 10
-
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 1
+    security_opt:
+    - no-new-privileges:true
+    command:
+    - redis-server
+    - --appendonly
+    - 'yes'
+    - --maxmemory
+    - 192mb
+    - --maxmemory-policy
+    - noeviction
   neo4j:
-    image: neo4j:5.26.0-community
+    image: neo4j:5.26.0-community@sha256:5a015e53de1895e7eee1574ae0325cf8c4b89587222778108c594bdd45a474b5
     environment:
       NEO4J_AUTH: ${NEO4J_AUTH:-neo4j/change-me-before-use}
       NEO4J_server_memory_heap_initial__size: 512m
       NEO4J_server_memory_heap_max__size: 1G
-      NEO4J_PLUGINS: '["apoc"]'
     ports:
-      - "7474:7474"
-      - "7687:7687"
+    - 127.0.0.1:7474:7474
+    - 127.0.0.1:7687:7687
     volumes:
-      - neo4j_data:/data
-      - neo4j_logs:/logs
+    - neo4j_data:/data
+    - neo4j_logs:/logs
+    - ./neo4j:/schema:ro
     healthcheck:
-      test: ["CMD-SHELL", "wget -q -O - http://localhost:7474 || exit 1"]
+      test:
+      - CMD-SHELL
+      - wget -q -O - http://localhost:7474 || exit 1
       interval: 10s
       timeout: 5s
       retries: 20
-
+    restart: unless-stopped
+    mem_limit: 2g
+    cpus: 2
+    security_opt:
+    - no-new-privileges:true
   qdrant:
-    image: qdrant/qdrant:v1.13.6
+    image: qdrant/qdrant:v1.13.6@sha256:bd67306b6cc77c98122cada2321eb60b20d00b19d26cb61c86681e7bd5951498
     ports:
-      - "6333:6333"
-      - "6334:6334"
+    - 127.0.0.1:6333:6333
+    - 127.0.0.1:6334:6334
     volumes:
-      - qdrant_data:/qdrant/storage
+    - qdrant_data:/qdrant/storage
     healthcheck:
-      # The minimal Qdrant image has no curl/wget. The host-side health script
-      # performs the HTTP readiness check; this container check confirms that
-      # Qdrant completed storage initialization.
-      test: ["CMD-SHELL", "test -f /qdrant/storage/raft_state.json"]
+      test:
+      - CMD-SHELL
+      - test -f /qdrant/storage/raft_state.json
       interval: 5s
       timeout: 5s
       retries: 20
-
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: 1
+    security_opt:
+    - no-new-privileges:true
+  api:
+    image: fingraph-rag-api:local
+    build: &id001
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    init: true
+    restart: unless-stopped
+    read_only: true
+    tmpfs: &id002
+    - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop: &id003
+    - ALL
+    security_opt: &id004
+    - no-new-privileges:true
+    mem_limit: 1g
+    cpus: 2
+    stop_grace_period: 35s
+    healthcheck: &id005
+      test:
+      - CMD
+      - python
+      - -c
+      - import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready',
+        timeout=2)
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 15s
+    profiles:
+    - api
+    ports:
+    - 127.0.0.1:8000:8000
+    volumes:
+    - api_state:/data
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    environment:
+      FINGRAPH_APP_ENV: ${FINGRAPH_APP_ENV:-dev}
+      FINGRAPH_RUNTIME_MODE: live
+      FINGRAPH_API_TOKEN: ${FINGRAPH_API_TOKEN:-}
+      FINGRAPH_NEO4J_HTTP_URL: ${FINGRAPH_NEO4J_HTTP_URL:-http://neo4j:7474}
+      FINGRAPH_NEO4J_USER: ${FINGRAPH_NEO4J_USER:-neo4j}
+      FINGRAPH_NEO4J_PASSWORD: ${FINGRAPH_NEO4J_PASSWORD:-change-me-before-use}
+      FINGRAPH_NEO4J_READ_USER: ${FINGRAPH_NEO4J_READ_USER:-}
+      FINGRAPH_NEO4J_READ_PASSWORD: ${FINGRAPH_NEO4J_READ_PASSWORD:-}
+      FINGRAPH_NEO4J_READER_VERIFIED: ${FINGRAPH_NEO4J_READER_VERIFIED:-false}
+      FINGRAPH_QDRANT_URL: http://qdrant:6333
+      FINGRAPH_EMBEDDING_URL: ${FINGRAPH_EMBEDDING_URL:-}
+      FINGRAPH_EMBEDDING_MODEL: ${FINGRAPH_EMBEDDING_MODEL:-}
+      FINGRAPH_EMBEDDING_API_KEY: ${FINGRAPH_EMBEDDING_API_KEY:-}
+      FINGRAPH_EMBEDDING_DIMENSIONS: ${FINGRAPH_EMBEDDING_DIMENSIONS:-384}
+      FINGRAPH_MODEL: ${FINGRAPH_MODEL:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      FINGRAPH_OTLP_ENDPOINT: ${FINGRAPH_OTLP_ENDPOINT:-}
+      FINGRAPH_TRACE_PATH: ${FINGRAPH_TRACE_PATH:-}
+      FINGRAPH_MAX_QUERY_SECONDS: '30'
+  synthetic-api:
+    image: fingraph-rag-api:local
+    build: *id001
+    init: true
+    restart: unless-stopped
+    read_only: true
+    tmpfs: *id002
+    cap_drop: *id003
+    security_opt: *id004
+    mem_limit: 1g
+    cpus: 2
+    stop_grace_period: 35s
+    healthcheck: *id005
+    profiles:
+    - synthetic
+    ports:
+    - 127.0.0.1:8001:8000
+    volumes:
+    - synthetic_api_state:/data
+    environment:
+      FINGRAPH_APP_ENV: test
+      FINGRAPH_RUNTIME_MODE: synthetic
+      FINGRAPH_FIXTURE: /app/tests/fixtures/graph/sample.json
+      FINGRAPH_API_TOKEN: ${FINGRAPH_API_TOKEN:-}
+      FINGRAPH_OTLP_ENDPOINT: ${FINGRAPH_OTLP_ENDPOINT:-}
+      FINGRAPH_TRACE_PATH: ${FINGRAPH_TRACE_PATH:-}
+      FINGRAPH_MAX_QUERY_SECONDS: '30'
+  fixture-worker:
+    image: fingraph-rag-fixture-worker:local
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.worker
+    profiles:
+    - ingestion
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 1
+    restart: 'no'
+  phoenix:
+    image: arizephoenix/phoenix@sha256:095f498723ec1fa3b55592af83d5a1e3bf026ba15a4a44e325f20dfdbb71452a
+    profiles:
+    - observability
+    ports:
+    - 127.0.0.1:6006:6006
+    - 127.0.0.1:4317:4317
+    environment:
+      PHOENIX_WORKING_DIR: /phoenix
+    volumes:
+    - phoenix_data:/phoenix
+    mem_limit: 1g
+    cpus: 1
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - python
+      - -c
+      - import urllib.request; urllib.request.urlopen('http://localhost:6006/healthz',
+        timeout=2)
+      interval: 10s
+      timeout: 3s
+      retries: 12
+  evaluation:
+    image: fingraph-rag-api:local
+    profiles:
+    - evaluation
+    command:
+    - python
+    - scripts/run_eval.py
+    - --dataset
+    - evals/datasets/smoke.jsonl
+    - --systems
+    - naive_hybrid
+    - fingraph_rag
+    - --output
+    - /data/evaluation
+    volumes:
+    - eval_reports:/data
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 1g
+    cpus: 1
+    restart: 'no'
 volumes:
-  postgres_data:
-  redis_data:
-  neo4j_data:
-  neo4j_logs:
-  qdrant_data:
+  postgres_data: null
+  redis_data: null
+  neo4j_data: null
+  neo4j_logs: null
+  qdrant_data: null
+  api_state: null
+  synthetic_api_state: null
+  phoenix_data: null
+  eval_reports: null

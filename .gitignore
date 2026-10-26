@@ -10,3 +10,8 @@ dist/
 build/
 *.egg-info/
 .DS_Store
+
+# Local runtime state and generated evaluation output may contain request data.
+.fingraph-state/
+/reports/
+/evals/data/public/

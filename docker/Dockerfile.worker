@@ -1,0 +1,4 @@
+# Explicit one-shot fixture ingestion CLI; this is not a durable queue worker.
+FROM fingraph-rag-api:local
+ENTRYPOINT ["python", "scripts/ingest_fixture.py"]
+CMD ["tests/fixtures/filings/synthetic_acme_10k.txt", "--canonical", "tests/fixtures/filings/synthetic_acme_10k.json", "--replay-check"]
