@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     neo4j_uri: str = "bolt://localhost:7687"
     neo4j_user: str = "neo4j"
     neo4j_password: SecretStr = SecretStr("change-me-before-use")
+    neo4j_read_user: str | None = None
+    neo4j_read_password: SecretStr | None = None
     qdrant_url: str = "http://localhost:6333"
 
     max_hops: int = Field(default=4, ge=0, le=4)
@@ -34,11 +36,14 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_runtime_secrets(self) -> "Settings":
-        if (
-            self.app_env == "prod"
-            and self.neo4j_password.get_secret_value() == "change-me-before-use"
-        ):
-            raise ValueError("FINGRAPH_NEO4J_PASSWORD must be changed in prod")
+        if self.app_env == "prod":
+            if not self.neo4j_read_user or not self.neo4j_read_password:
+                raise ValueError(
+                    "FINGRAPH_NEO4J_READ_USER and FINGRAPH_NEO4J_READ_PASSWORD "
+                    "must be changed in prod"
+                )
+            if self.neo4j_read_user == self.neo4j_user:
+                raise ValueError("production graph reader credentials must be separate")
         return self
 
 
