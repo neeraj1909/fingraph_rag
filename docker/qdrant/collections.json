@@ -1,0 +1,12 @@
+{
+  "collection": "fingraph_chunks",
+  "schema": {
+    "vectors": {"dense": {"size": 384, "distance": "Cosine"}},
+    "sparse_vectors": {"sparse": {"index": {"on_disk": false}}}
+  },
+  "payload_indexes": {
+    "doc_id": "keyword", "entity_ids": "keyword", "kind": "keyword",
+    "fiscal_year": "integer", "fiscal_quarter": "keyword",
+    "restatement_version": "integer", "filing_date": "datetime"
+  }
+}

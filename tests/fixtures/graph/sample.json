@@ -1,0 +1,100 @@
+{
+  "aliases": {
+    "Parent": "parent",
+    "Subsidiary": "subsidiary",
+    "Supplier": "supplier"
+  },
+  "graph_paths": [
+    {
+      "path_id": "parent-subsidiary-supplier",
+      "entity_ids": [
+        "parent",
+        "subsidiary",
+        "supplier"
+      ],
+      "relationships": [
+        {
+          "assertion_id": "assertion-0",
+          "subject_entity_id": "parent",
+          "predicate": "OWNS_STAKE_IN",
+          "object_entity_id": "subsidiary",
+          "temporal": {
+            "fiscal_year": 2025,
+            "fiscal_quarter": "FY",
+            "filing_date": "2026-02-01",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "restatement_version": 0
+          },
+          "source_doc_id": "synthetic-parent-fy2025",
+          "extraction_run_id": "synthetic-v1",
+          "locators": [
+            {
+              "doc_id": "synthetic-parent-fy2025",
+              "filing_date": "2026-02-01",
+              "page": 1,
+              "table_id": "income",
+              "cell_range": "B2",
+              "quote_hash": "synthetic1234"
+            }
+          ],
+          "confidence": 1
+        },
+        {
+          "assertion_id": "assertion-1",
+          "subject_entity_id": "subsidiary",
+          "predicate": "SUPPLIES_TO",
+          "object_entity_id": "supplier",
+          "temporal": {
+            "fiscal_year": 2025,
+            "fiscal_quarter": "FY",
+            "filing_date": "2026-02-01",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "restatement_version": 0
+          },
+          "source_doc_id": "synthetic-parent-fy2025",
+          "extraction_run_id": "synthetic-v1",
+          "locators": [
+            {
+              "doc_id": "synthetic-parent-fy2025",
+              "filing_date": "2026-02-01",
+              "page": 1,
+              "table_id": "income",
+              "cell_range": "B2",
+              "quote_hash": "synthetic1234"
+            }
+          ],
+          "confidence": 1
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "parent-revenue-2025",
+      "text": "Parent FY2025 revenue was USD 120 million. Synthetic data only.",
+      "locator": {
+        "doc_id": "synthetic-parent-fy2025",
+        "filing_date": "2026-02-01",
+        "page": 1,
+        "table_id": "income",
+        "cell_range": "B2",
+        "quote_hash": "synthetic1234"
+      },
+      "temporal": {
+        "fiscal_year": 2025,
+        "fiscal_quarter": "FY",
+        "filing_date": "2026-02-01",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "restatement_version": 0
+      },
+      "entity_ids": [
+        "parent"
+      ],
+      "kind": "table",
+      "metric_key": "revenue"
+    }
+  ]
+}
