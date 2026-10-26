@@ -47,7 +47,9 @@ jobs:
         run: docker compose -f docker/compose.yaml config --quiet
 
       - name: Start storage dependencies
-        run: docker compose -f docker/compose.yaml up -d postgres redis neo4j qdrant
+        run: >-
+          docker compose -f docker/compose.yaml up -d
+          --wait --wait-timeout 240 postgres redis neo4j qdrant
 
       - name: Check storage readiness
         run: uv run python scripts/check_health.py --required postgres redis neo4j qdrant
@@ -67,6 +69,12 @@ jobs:
 
       - name: Build API image
         run: docker compose -f docker/compose.yaml build api
+
+      - name: Collect storage diagnostics
+        if: failure()
+        run: |
+          docker compose -f docker/compose.yaml ps --all
+          docker compose -f docker/compose.yaml logs --no-color --tail 200 postgres redis neo4j qdrant
 
       - name: Remove CI services
         if: always()
