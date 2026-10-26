@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "provenance": {
+    "finqa": {
+      "repository": "https://github.com/czyssrs/FinQA",
+      "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "dataset_information": "https://finqasite.github.io/about.html",
+      "dataset_license_statement": "The project site identifies the dataset as CC BY 4.0; the repository MIT license applies to repository code. This records source statements and is not a legal determination.",
+      "source_note": "private_test is publicly downloadable but has no answer/program labels."
+    },
+    "docfinqa": {
+      "repository": "https://huggingface.co/datasets/kensho/DocFinQA",
+      "revision": "64ebaff62f692495bcc182f45cf9a9606251b19b",
+      "dataset_card": "https://huggingface.co/datasets/kensho/DocFinQA/blob/64ebaff62f692495bcc182f45cf9a9606251b19b/README.md",
+      "dataset_card_license_statement": "The dataset card metadata says MIT. Underlying SEC filing context may have separate source terms; this record makes no legal determination."
+    },
+    "financial_sec_qa": {
+      "paper": "https://aclanthology.org/2025.finnlp-2.15/",
+      "availability": "A refreshable question-generation framework; no fixed public split files, official pinned dataset repository, or direct download was verified.",
+      "note": "Do not substitute the unrelated cybersecurity SecQA benchmark."
+    }
+  },
+  "sources": {
+    "finqa_train": {
+      "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/train.json",
+      "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "git_blob_sha1": "a6c2c5a60f9abe3fba5a793cc4d9e1dee2e09209",
+      "sha256": "49f237eb9779b569473b26b08048867d04635a7cc39ad6a7a5664c55bb428db6",
+      "size_bytes": 78216616,
+      "expected_rows": 6251,
+      "split": "train",
+      "profile": "finqa_nested",
+      "filename": "finqa_train.json"
+    },
+    "finqa_dev": {
+      "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+      "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da",
+      "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "size_bytes": 10954658,
+      "expected_rows": 883,
+      "split": "dev",
+      "profile": "finqa_nested",
+      "filename": "finqa_dev.json"
+    },
+    "finqa_test": {
+      "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/test.json",
+      "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "git_blob_sha1": "59958c7c3bb3b21f4dff6bc912a0fe0ae710aee0",
+      "sha256": "831dbfb2e785dbc227f895ce3f24046433467aec67b09db2bd6ac7692a8a30dc",
+      "size_bytes": 14395143,
+      "expected_rows": 1147,
+      "split": "test",
+      "profile": "finqa_nested",
+      "filename": "finqa_test.json"
+    },
+    "finqa_private_test": {
+      "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/private_test.json",
+      "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "git_blob_sha1": "af7ef36c00f4d4d31c77d54512a01ba32bf7be92",
+      "sha256": "94dfd3f82aeeb91835da7a161c5d64b9223ed3c630a27457cf5695da2ee24756",
+      "size_bytes": 5597114,
+      "expected_rows": 919,
+      "split": "private_test",
+      "profile": "finqa_nested",
+      "require_labels": false,
+      "filename": "finqa_private_test.json"
+    },
+    "docfinqa_train": {
+      "url": "https://huggingface.co/datasets/kensho/DocFinQA/resolve/64ebaff62f692495bcc182f45cf9a9606251b19b/train.json",
+      "revision": "64ebaff62f692495bcc182f45cf9a9606251b19b",
+      "sha256": "ab59345df17638ebd59402adeab07b0768563a670cfb3538aea97cfdefb93f31",
+      "size_bytes": 3624998065,
+      "expected_rows": 5735,
+      "split": "train",
+      "profile": "docfinqa_flat",
+      "filename": "docfinqa_train.json"
+    },
+    "docfinqa_dev": {
+      "url": "https://huggingface.co/datasets/kensho/DocFinQA/resolve/64ebaff62f692495bcc182f45cf9a9606251b19b/dev.json",
+      "revision": "64ebaff62f692495bcc182f45cf9a9606251b19b",
+      "sha256": "f8b69c455c6772320caf42544eaf802fbabdc716fecd12c938356fbe0635deb9",
+      "size_bytes": 496285887,
+      "expected_rows": 780,
+      "split": "validation",
+      "profile": "docfinqa_flat",
+      "filename": "docfinqa_dev.json"
+    },
+    "docfinqa_test": {
+      "url": "https://huggingface.co/datasets/kensho/DocFinQA/resolve/64ebaff62f692495bcc182f45cf9a9606251b19b/test.json",
+      "revision": "64ebaff62f692495bcc182f45cf9a9606251b19b",
+      "sha256": "0ebf95ccc719e72f45333e256928c90e8fa7a9a81f226dcb38ad7b3a48a3ff42",
+      "size_bytes": 581393499,
+      "expected_rows": 922,
+      "split": "test",
+      "profile": "docfinqa_flat",
+      "filename": "docfinqa_test.json"
+    }
+  }
+}
